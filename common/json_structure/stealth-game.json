@@ -1,0 +1,337 @@
+{
+  "appVersion": "1.0.0",
+  "jsonVersion": "1.0.0",
+  "name": "Neighbourhood Stealth",
+  "instructions": {
+    "title": "Willkommen bei Neighbourhood Stealth!",
+    "text": "Du bist auf einer streng geheimen Mission, um einen Gegenstand von großer Bedeutung an einen sicheren Ort zu bringen. Aber Vorsicht: gegnerische Agenten halten nach dir Ausschau. Erreiche das Ziel, ohne gesehen zu werden und ohne die Spielzone zu verlassen!",
+    "btnText": "Ich bin bereit"
+  },
+  "propertyBag": [
+    {
+      "name": "lives",
+      "value": 3,
+      "icon": "mdi-heart"
+    },
+    {
+      "name": "reached-destination",
+      "value": false,
+      "icon": null
+    }
+  ],
+  "gameConditions": [
+    {
+      "type": "win",
+      "condition": {
+        "accessor": "propertyBag",
+        "key": "reached-destination",
+        "value": true,
+        "operator": "equals"
+      },
+      "events": [
+        {
+          "eventType": "popup",
+          "title": "Mission erfolgreich!",
+          "text": "Du hast das Ziel erreicht, ohne entdeckt zu werden! Herzlichen Glückwunsch!",
+          "btnText": "Zurück zum Menü",
+          "nextEvent": {
+            "eventType": "backToMenu",
+            "nextEvent": null
+          }
+        }
+      ]
+    },
+    {
+      "type": "lose",
+      "condition": {
+        "accessor": "propertyBag",
+        "key": "lives",
+        "value": 0,
+        "operator": "equals"
+      },
+      "events": [
+        {
+          "eventType": "popup",
+          "title": "Game over!",
+          "text": "Du hast es nicht geschafft. Versuch es noch einmal!",
+          "btnText": "Zurück zum Menü",
+          "nextEvent": {
+            "eventType": "backToMenu",
+            "nextEvent": null
+          }
+        }
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": "1",
+      "style": {
+        "spread": "point",
+        "marker": "hostile"
+      },
+      "name": "Feind 1",
+      "position": {
+        "type": "relative",
+        "lat": 0.0015,
+        "lng": 0.0035,
+        "movement": {
+          "lat": -0.0003,
+          "lng": 0.0003,
+          "duration": 45000
+        }
+      },
+      "radius": 30,
+      "visibilityCheck": [],
+      "trigger": "onEnter",
+      "onEnter": [
+        {
+          "eventType": "bag",
+          "property": {
+            "key": "lives",
+            "value": 1,
+            "action": "remove"
+          },
+          "nextEvent": null
+        }
+      ],
+      "onLeave": []
+    },
+    {
+      "id": "2",
+      "style": {
+        "spread": "point",
+        "marker": "hostile"
+      },
+      "name": "Feind 2",
+      "position": {
+        "type": "relative",
+        "lat": -0.0003,
+        "lng": 0.0015,
+        "movement": {
+          "lat": 0.0001,
+          "lng": 0.0003,
+          "duration": 24000
+        }
+      },
+      "radius": 30,
+      "visibilityCheck": [],
+      "onEnter": [
+        {
+          "eventType": "bag",
+          "property": {
+            "key": "lives",
+            "value": 1,
+            "action": "remove"
+          },
+          "nextEvent": null
+        }
+      ],
+      "onLeave": []
+    },
+    {
+      "id": "3",
+      "style": {
+        "spread": "point",
+        "marker": "hostile"
+      },
+      "name": "Aussichtsturm 1",
+      "position": {
+        "type": "relative",
+        "lat": 0.00126,
+        "lng": 0.0015,
+        "movement": null
+      },
+      "radius": 60,
+      "visibilityCheck": [],
+      "onEnter": [
+        {
+          "eventType": "bag",
+          "property": {
+            "key": "lives",
+            "value": 1,
+            "action": "remove"
+          },
+          "nextEvent": null
+        }
+      ],
+      "onLeave": []
+    },
+    {
+      "id": "4",
+      "style": {
+        "spread": "point",
+        "marker": "hostile"
+      },
+      "name": "Feind 3",
+      "position": {
+        "type": "relative",
+        "lat": 0.0004,
+        "lng": 0.004,
+        "movement": {
+          "lat": 0.0005,
+          "lng": 0.0,
+          "duration": 48000
+        }
+      },
+      "radius": 30,
+      "visibilityCheck": [],
+      "onEnter": [
+        {
+          "eventType": "bag",
+          "property": {
+            "key": "lives",
+            "value": 1,
+            "action": "remove"
+          },
+          "nextEvent": null
+        }
+      ],
+      "onLeave": []
+    },
+    {
+      "id": "5",
+      "style": {
+        "spread": "point",
+        "marker": "hostile"
+      },
+      "name": "Aussichtsturm 2",
+      "position": {
+        "type": "relative",
+        "lat": 0.002,
+        "lng": 0.005,
+        "movement": null
+      },
+      "radius": 60,
+      "visibilityCheck": [],
+      "onEnter": [
+        {
+          "eventType": "bag",
+          "property": {
+            "key": "lives",
+            "value": 1,
+            "action": "remove"
+          },
+          "nextEvent": null
+        }
+      ],
+      "onLeave": []
+    },
+    {
+      "id": "6",
+      "style": {
+        "spread": "point",
+        "marker": "hostile"
+      },
+      "name": "Feind 4",
+      "position": {
+        "type": "relative",
+        "lat": 0.0011,
+        "lng": 0.0065,
+        "movement": {
+          "lat": -0.0005,
+          "lng": 0,
+          "duration": 42000
+        }
+      },
+      "radius": 35,
+      "visibilityCheck": [],
+      "onEnter": [
+        {
+          "eventType": "bag",
+          "property": {
+            "key": "lives",
+            "value": 1,
+            "action": "remove"
+          },
+          "nextEvent": null
+        }
+      ],
+      "onLeave": []
+    },
+    {
+      "id": "7",
+      "style": {
+        "spread": "point",
+        "marker": "hostile"
+      },
+      "name": "Aussichtsturm 3",
+      "position": {
+        "type": "relative",
+        "lat": -0.0002,
+        "lng": 0.0065,
+        "movement": null
+      },
+      "radius": 60,
+      "visibilityCheck": [],
+      "onEnter": [
+        {
+          "eventType": "bag",
+          "property": {
+            "key": "lives",
+            "value": 1,
+            "action": "remove"
+          },
+          "nextEvent": null
+        }
+      ],
+      "onLeave": []
+    },
+    {
+      "id": "8",
+      "style": {
+        "spread": "point",
+        "marker": "checkpoint"
+      },
+      "name": "Ziel",
+      "position": {
+        "type": "relative",
+        "lat": 0.001229,
+        "lng": 0.007711,
+        "movement": null
+      },
+      "radius": 20,
+      "visibilityCheck": [],
+      "onEnter": [
+        {
+          "eventType": "bag",
+          "property": {
+            "key": "reached-destination",
+            "value": true,
+            "action": "update"
+          },
+          "nextEvent": null
+        }
+      ],
+      "onLeave": []
+    },
+    {
+      "id": "9",
+      "style": {
+        "spread": "area",
+        "marker": "neutral"
+      },
+      "name": "Bounds",
+      "position": {
+        "type": "relative",
+        "lat": 0.0006145,
+        "lng": 0.0038555,
+        "movement": null
+      },
+      "radius": 320,
+      "visibilityCheck": [],
+      "onEnter": [],
+      "onLeave": [
+        {
+          "eventType": "bag",
+          "property": {
+            "key": "lives",
+            "value": 0,
+            "action": "update"
+          },
+          "nextEvent": null
+        }
+      ]
+    }
+  ]
+}

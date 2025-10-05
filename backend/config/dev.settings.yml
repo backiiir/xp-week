@@ -1,0 +1,11 @@
+db:
+  mongo:
+    url: mongodb://localhost:27017
+    database: mobile-project
+app:
+  options:
+    port: 3000
+    host: localhost
+  jwt:
+    secret: aZKkeAH3jkTvMEd6Pc!55r$0K
+    expiresIn: 31556952

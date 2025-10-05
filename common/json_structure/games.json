@@ -1,0 +1,21 @@
+{
+  "appVersion": "1.0.0",
+  "jsonVersion": "1.0.0",
+  "games": [
+    {
+      "name": "FH Tour",
+      "source": "https://it231507-20233.php.fhstp.cc/fh-campus-tour.json",
+      "previewImage": "https://secure-psas.apa.at/apascience/?iU8bM7xP5bUME0W800-2Ru6I07rD5eeHtEmRSDM1L-jeiO-rs7jtDgiVMLngDvnxsS-I3EU1huBZBZzhbfvjqGiqbPsJBItZo-H31TvQS6C9dGVvAUnWu2sE"
+    },
+    {
+      "name": "Stealth Game",
+      "source": "https://it231507-20233.php.fhstp.cc/stealth-game.json",
+      "previewImage": "https://s.yimg.com/ny/api/res/1.2/.Mt0Vs0HwQpbPHVSeKmpIA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTQ3OQ--/http://globalfinance.zenfs.com/en_us/Finance/US_AFTP_SILICONALLEY_H_LIVE/Atmospheir_Is_A_Quick-And-Dirty_Contacts-35d82e158fc9e878f67bfd1d61476056"
+    },
+    {
+      "name": "Test Game",
+      "source": "https://it231507-20233.php.fhstp.cc/test-game.json",
+      "previewImage": null
+    }
+  ]
+}

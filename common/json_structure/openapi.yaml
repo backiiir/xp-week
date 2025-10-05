@@ -1,0 +1,450 @@
+openapi: 3.0.0
+info:
+  title: Workingtitle
+  description: Api specification for our XP-Week framework.
+  version: 1.0.0
+servers:
+  - url: 'https://api.example.com/v1'
+    description: Main production server
+paths:
+  /games:
+    get:
+      summary: Get list of all games
+      responses:
+        '200':
+          description: A list of games
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
+  /games/{gameId}:
+    get:
+      summary: Get structure for a specific game
+      parameters:
+        - name: gameId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A specified game
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/GameSpecification'
+components:
+  schemas:
+    Game:
+      type: object
+      properties:
+        name:
+          type: string
+        source:
+          type: string
+          example: fh-campus-tour.json
+        previewImage:
+          type: string
+          example: https://www.fhstp.ac.at/fileadmin/_processed_/csm_FH_StPoelten_Logo_2018
+      required:
+        - name
+        - source
+        - previewImage
+    GameSpecification:
+      type: object
+      properties:
+        appVersion:
+          type: string
+          example: App version required to interpret json
+        jsonVersion:
+          type: string
+        name:
+          type: string
+        instructions:
+          nullable: true
+          anyOf:
+            - $ref: '#/components/schemas/Instructions'
+        propertyBag:
+          nullable: true
+          anyOf:
+            - $ref: '#/components/schemas/propertyBag'
+        gameConditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameCondition'
+        locations:
+          $ref: '#/components/schemas/Locations'
+      required:
+        - appVersion
+        - jsonVersion
+        - name
+        - gameConditions
+        - locations
+    Instructions:
+      type: object
+      properties:
+        title:
+          type: string
+        text:
+          type: string
+        btnText:
+          type: string
+      required:
+        - title
+        - text
+        - btnText
+    propertyBag:
+      type: array
+      items:
+        $ref: '#/components/schemas/PropertyBagProperty'
+      required:
+        - items
+    Condition:
+      type: object
+      properties:
+        accessor:
+          type: string
+          enum: [propertyBag, globalBag]
+        key:
+          type: string
+        value:
+          oneOf:
+            - type: string
+            - type: integer
+            - type: boolean
+            - type: array
+              items:
+                oneOf:
+                  - type: string
+                  - type: integer
+        operator:
+          type: string
+          enum: [equals, notEquals, contains, notContains, greaterThan, lessThan]
+      required:
+        - accessor
+        - key
+        - value
+        - operator
+    GameCondition:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [win, lose, rule]
+        condition:
+          $ref: '#/components/schemas/Condition'
+        events:
+          type: array
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/BagEventType'
+              - $ref: '#/components/schemas/PopupEventType'
+              - $ref: '#/components/schemas/InputEventType'
+              - $ref: '#/components/schemas/BackToMenuEventType'
+            discriminator:
+              propertyName: eventType
+              mapping:
+                bag: '#/components/schemas/BagEventType'
+                popup: '#/components/schemas/PopupEventType'
+                input: '#/components/schemas/InputEventType'
+                backToMenu: '#/components/schemas/BackToMenuEventType'
+      required:
+        - type
+        - condition
+        - events
+    PropertyBagProperty:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          oneOf:
+            - type: string
+            - type: integer
+            - type: boolean
+            - type: array
+              items:
+                oneOf:
+                  - type: string
+                  - type: integer
+        icon:
+          type: string
+          nullable: true
+      required:
+        - name
+        - value
+        - icon
+    Locations:
+      type: array
+      items:
+        $ref: '#/components/schemas/Location'
+    Location:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        style:
+          $ref: '#/components/schemas/Style'
+        position:
+          $ref: '#/components/schemas/Position'
+        radius:
+          type: integer
+        visibilityCheck:
+          type: array
+          items:
+            $ref: '#/components/schemas/Condition'
+          nullable: true
+        onEnter:
+          type: array
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/BagEventType'
+              - $ref: '#/components/schemas/PopupEventType'
+              - $ref: '#/components/schemas/InputEventType'
+              - $ref: '#/components/schemas/BackToMenuEventType'
+            discriminator:
+              propertyName: eventType
+              mapping:
+                bag: '#/components/schemas/BagEventType'
+                popup: '#/components/schemas/PopupEventType'
+                input: '#/components/schemas/InputEventType'
+                backToMenu: '#/components/schemas/BackToMenuEventType'
+          nullable: true
+        onLeave:
+          type: array
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/BagEventType'
+              - $ref: '#/components/schemas/PopupEventType'
+              - $ref: '#/components/schemas/InputEventType'
+              - $ref: '#/components/schemas/BackToMenuEventType'
+            discriminator:
+              propertyName: eventType
+              mapping:
+                bag: '#/components/schemas/BagEventType'
+                popup: '#/components/schemas/PopupEventType'
+                input: '#/components/schemas/InputEventType'
+                backToMenu: '#/components/schemas/BackToMenuEventType'
+          nullable: true
+      required:
+        - id
+        - name
+        - style
+        - position
+        - radius
+        - visibilityCheck
+        - trigger
+    Style:
+      type: object
+      properties:
+        spread:
+          type: string
+          enum: [point, area]
+        marker:
+          type: string
+          enum: [hostile, checkpoint, neutral]
+      required:
+        - spread
+        - marker
+    BagEventType:
+      type: object
+      properties:
+        eventType:
+          type: string
+          enum: [bag]
+        property:
+          $ref: '#/components/schemas/Property'
+        condition:
+          nullable: true
+          anyOf:
+            - $ref: '#/components/schemas/Condition'
+        nextEvent:
+          type: object
+          oneOf:
+            - $ref: '#/components/schemas/BagEventType'
+            - $ref: '#/components/schemas/PopupEventType'
+            - $ref: '#/components/schemas/InputEventType'
+            - $ref: '#/components/schemas/BackToMenuEventType'
+          discriminator:
+            propertyName: eventType
+            mapping:
+              bag: '#/components/schemas/BagEventType'
+              popup: '#/components/schemas/PopupEventType'
+              input: '#/components/schemas/InputEventType'
+              backToMenu: '#/components/schemas/InputEventType'
+          nullable: true
+      required:
+        - eventType
+        - property
+    PopupEventType:
+      type: object
+      properties:
+        eventType:
+          type: string
+          enum: [popup]
+        title:
+          type: string
+        text:
+          type: string
+        btnText:
+          type: string
+        condition:
+          nullable: true
+          anyOf:
+            - $ref: '#/components/schemas/Condition'
+        nextEvent:
+          type: object
+          oneOf:
+            - $ref: '#/components/schemas/BagEventType'
+            - $ref: '#/components/schemas/PopupEventType'
+            - $ref: '#/components/schemas/InputEventType'
+            - $ref: '#/components/schemas/BackToMenuEventType'
+          discriminator:
+            propertyName: eventType
+            mapping:
+              bag: '#/components/schemas/BagEventType'
+              popup: '#/components/schemas/PopupEventType'
+              input: '#/components/schemas/InputEventType'
+              backToMenu: '#/components/schemas/BackToMenuEventType'
+          nullable: true
+      required:
+        - eventType
+        - title
+        - text
+        - btnText
+    InputEventType:
+      type: object
+      properties:
+        eventType:
+          type: string
+          enum: [input]
+        placeholder:
+          type: string
+        title:
+          type: string
+        text:
+          type: string
+        btnText:
+          type: string
+        answer:
+          type: string
+        hint:
+          type: string
+          nullable: true
+        condition:
+          nullable: true
+          anyOf:
+            - $ref: '#/components/schemas/Condition'
+        nextEvent:
+          type: object
+          oneOf:
+            - $ref: '#/components/schemas/BagEventType'
+            - $ref: '#/components/schemas/PopupEventType'
+            - $ref: '#/components/schemas/InputEventType'
+            - $ref: '#/components/schemas/BackToMenuEventType'
+          discriminator:
+            propertyName: eventType
+            mapping:
+              bag: '#/components/schemas/BagEventType'
+              popup: '#/components/schemas/PopupEventType'
+              input: '#/components/schemas/InputEventType'
+              backToMenu: '#/components/schemas/BackToMenuEventType'
+          nullable: true
+      required:
+        - eventType
+        - title
+        - text
+        - btnText
+        - placeholder
+        - answer
+    BackToMenuEventType:
+      type: object
+      properties:
+        eventType:
+          type: string
+          enum: [backToMenu]
+        condition:
+          nullable: true
+          anyOf:
+            - $ref: '#/components/schemas/Condition'
+        nextEvent:
+          type: object
+          oneOf:
+            - $ref: '#/components/schemas/BagEventType'
+            - $ref: '#/components/schemas/PopupEventType'
+            - $ref: '#/components/schemas/InputEventType'
+            - $ref: '#/components/schemas/BackToMenuEventType'
+          discriminator:
+            propertyName: eventType
+            mapping:
+              bag: '#/components/schemas/BagEventType'
+              popup: '#/components/schemas/PopupEventType'
+              input: '#/components/schemas/InputEventType'
+              backToMenu: '#/components/schemas/BackToMenuEventType'
+          nullable: true
+      required:
+        - eventType
+    Position:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [absolute, relative]
+        lat:
+          type: number
+          format: double
+        lng:
+          type: number
+          format: double
+        movement:
+          nullable: true
+          anyOf:
+            - $ref: '#/components/schemas/Movement'
+      required:
+        - type
+        - lat
+        - lng
+    Movement:
+      type: object
+      properties:
+        lat:
+          type: number
+          format: double
+        lng:
+          type: number
+          format: double
+        duration:
+          type: integer
+          example: 1000
+          nullable: true
+      required:
+        - lat
+        - lng
+    Property:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          oneOf:
+            - type: string
+            - type: integer
+            - type: boolean
+            - type: array
+              items:
+                oneOf:
+                  - type: string
+                  - type: integer
+        action:
+          type: string
+          enum: [add, update, remove]
+      required:
+        - key
+        - value
+        - action

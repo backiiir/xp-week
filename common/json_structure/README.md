@@ -1,0 +1,51 @@
+- app-version: Minimum Version der App, um das Json zu interpretieren
+- json-version: Version des Jsons
+- name: Name des Spiels
+- instructions: Spezifikationen für das erste Popup, das im Spiel gezeigt wird
+- propertyBag: Alle variablen, die im local storage verwaltet werden
+  - wenn icon null ist erscheint es nicht in der UI, ansonsten soll es mit dem Icon angezeigt werden.
+    standardmäßig werden einfach ein icon und die value daneben angezeigt. wenn es ein array ist kann das frontend noch entscheiden, wie das aussehen soll.
+- gameConditions: Generelle Regeln, die bei jedem update überprüft werden
+  - types:
+    - win: Beendet Spiel mit Erfolg
+    - lose: Beendet Spiel mit Game Over
+    - rule: Beeinflussen das Spiel ohne Beenden
+  - ess muss eine win geben und es darf maximal eine win und eine lose geben.
+- locations: array von allen locations
+
+  - style: wie die location aussieht
+  - spread: point und area
+  - marker: string für den Typ des Markers
+  - checkpoint: Aktuelles Ziel, grüne Flagge
+  - hostile: Feindliche Location
+  - types:
+    - point: Punkte auf der Map, als Marker angezeigt
+    - area: Bereich auf der Map, eventuell garnicht angezeigt
+  - position: Objekt, das angibt ob es eine absolute oder relative Position ist, die Position selbst und ob sie sich bewegbt
+  - radius: Der Toleranzbereich, in dem die Spieler\*in erkannt wird
+  - visibilityCheck: Array von Bedingungen, die erfüllt sein müssen, damit die Location sichtbar ist, alle Conditions müssen true sein, also AND
+  - trigger: wann die Events feuern, entweder onEnter oder onLeave
+  - events: array von events, die unabgängig voneinander ablaufen können
+    - condition gibt an ob es ausgeführt werden soll (auch der ganze Tree von da an wird nicht ausgeführt)
+    - wenn zwei events im array ein popup/input öffnen, dann müssen die conditions so gesetzt werden, dass nicht zwei popups gleichzeitig aktiviert werden.
+  - Eventtypes:
+    - popup: Nur Info Text
+    - input: Title ist Title von Popup in dem es drinnen ist, Text ist Beschreibung von Popup, Placeholder ist für Input, Hint ist für falschen Input
+    - bag: Etwas wird dem Bag hinzugefügt oder entfernt
+      - Actions:
+        - Add (Fügt ein Item zu array oder addiert einen integer)
+        - Remove (Löscht ein Item aus array oder subtrahiert einen integer)
+        - Update (überschreibt einen Wert)
+  - nextEvent: nächstes event, das ausgeführt werden soll
+  - Conditions:
+    - accessor: entweder PropertyBag oder Global Bag (PropertyBag ist Spiel spezifisch, Global nicht)
+      - GlobalBag entählt zwei Funktionen:
+        - getTimeElapsed() die die Zeit in millisekunden zurück gibt, seit dem das Spiel begonnen hat
+        - für AbsoluteTime gibt es keine spezifische Funktion
+    - key: der key, unter dem der value im jeweiligen accessor vorhanden ist
+      - für die GlobalBag gibt es zwei keys: timeelapsed und absolutetime, wenn die im json vorkommen, sollen die jeweiligen Funktionen aufgerufen werden
+    - value: der Wert, mit dem verglichen werden soll
+      - für absolutetime -> "hh:mm"
+    - operator: kann sein: equals, notEquals, contains, notContains, greaterThan, lessThan
+
+  Standardmäßig hat jedes game globalBag, das im json nicht vorkommt. Das bag beinhaltet eine time-elapsed, die die Zeit in millisekunden angibt, die seit dem Start des Spieles vergangen ist.

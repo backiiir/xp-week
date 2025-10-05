@@ -1,0 +1,11 @@
+db:
+  mongo:
+    url: ${MONGO_URL}
+    database: ${MONGO_DB}
+app:
+  options:
+    port: 3000
+    host: localhost
+  jwt:
+    secret: ${JWT_SECRET}
+    expiresIn: 3600

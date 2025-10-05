@@ -1,0 +1,486 @@
+{
+  "appVersion": "1.0.0",
+  "jsonVersion": "1.0.0",
+  "name": "FH St. Pölten Tour",
+  "instructions": {
+    "title": "Willkommen zur FHSTP Campus Tour",
+    "text": "Begib dich auf eine Reise durch St. Pölten. Besuche die verschiedenen Orte und beantworte dort jeweils eine Frage pro Ort. Wenn du alle Tour-Stopps besucht und die Fragen richtig beantwortet hast, hast du gewonnen.",
+    "btnText": "Tour starten"
+  },
+  "propertyBag": [
+    {
+      "name": "lastLocation",
+      "value": "0",
+      "icon": null
+    }
+  ],
+  "gameConditions": [
+    {
+      "type": "win",
+      "condition": {
+        "accessor": "propertyBag",
+        "key": "lastLocation",
+        "value": "9",
+        "operator": "equals"
+      },
+      "events": [
+        {
+          "eventType": "popup",
+          "title": "Tour vorbei!",
+          "text": "Gratuliere, du hast die Campus Tour abgeschlossen!",
+          "btnText": "Zurück zum Menü",
+          "nextEvent": {
+            "eventType": "backToMenu",
+            "nextEvent": null
+          }
+        }
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": "1",
+      "style": {
+        "spread": "point",
+        "marker": "checkpoint"
+      },
+      "name": "Gebäude A",
+      "position": {
+        "type": "absolute",
+        "lat": 48.21399,
+        "lng": 15.631633,
+        "movement": null
+      },
+      "radius": 20,
+      "visibilityCheck": [
+        {
+          "accessor": "propertyBag",
+          "key": "lastLocation",
+          "value": "0",
+          "operator": "equals"
+        }
+      ],
+      "onEnter": [
+        {
+          "eventType": "input",
+          "placeholder": "Antwort eingeben",
+          "title": "Gebäude A Frage:",
+          "text": "Wie viele Stockwerke hat Gebäude A?",
+          "btnText": "Antworten",
+          "answer": "5",
+          "hint": "Vergiss nicht den Keller.",
+          "condition": null,
+          "nextEvent": {
+            "eventType": "popup",
+            "title": "Richtig",
+            "text": "Das Gebäude A hat 5 Stockwerke. Gebäude A am Campus St. Pölten bietet großzügige Veranstaltungsräume, darunter drei Festsäle und das Audimax. Mit seiner modernen Architektur aus Glas und Stahl im Außenbereich und einer warmen Wohlfühlatmosphäre im Inneren schafft es den idealen Rahmen für Fachtagungen, Firmenfeiern und andere Events.",
+            "btnText": "Nächster Stop",
+            "condition": null,
+            "nextEvent": {
+              "eventType": "bag",
+              "property": {
+                "key": "lastLocation",
+                "value": "1",
+                "action": "update"
+              },
+              "nextEvent": null
+            }
+          }
+        }
+      ],
+      "onLeave": []
+    },
+    {
+      "id": "2",
+      "style": {
+        "spread": "point",
+        "marker": "checkpoint"
+      },
+      "name": "Gebäude B",
+      "position": {
+        "type": "absolute",
+        "lat": 48.213289,
+        "lng": 15.63117,
+        "movement": null
+      },
+      "radius": 20,
+      "visibilityCheck": [
+        {
+          "accessor": "propertyBag",
+          "key": "lastLocation",
+          "value": "1",
+          "operator": "equals"
+        }
+      ],
+      "onEnter": [
+        {
+          "eventType": "input",
+          "placeholder": "Antwort eingeben",
+          "title": "Gebäude B Frage:",
+          "text": "Wie viele Lifte hat Gebäude B?",
+          "btnText": "Antworten",
+          "answer": "2",
+          "hint": "Neben dem Campus Service Center.",
+          "condition": null,
+          "nextEvent": {
+            "eventType": "popup",
+            "title": "Richtig",
+            "text": "Das Gebäude B hat 2 Lifte. Gebäude B, das erst 2021 eröffnet wurde, beherbergt am Campus St. Pölten zukunftsweisende Labore sowie modernste Seminarräume. Durch die Verbindung mit Gebäude A über einen gläsernen Verbindungsgang entsteht eine harmonische Einheit, die den Campus zu einem inspirierenden Ort für Veranstaltungen jeglicher Art macht.",
+            "btnText": "Nächster Stop",
+            "nextEvent": {
+              "eventType": "bag",
+              "property": {
+                "key": "lastLocation",
+                "value": "2",
+                "action": "update"
+              },
+              "nextEvent": null
+            }
+          }
+        }
+      ],
+      "onLeave": []
+    },
+    {
+      "id": "3",
+      "style": {
+        "spread": "point",
+        "marker": "checkpoint"
+      },
+      "name": "BIZ",
+      "position": {
+        "type": "absolute",
+        "lat": 48.2124,
+        "lng": 15.630395,
+        "movement": null
+      },
+      "radius": 20,
+      "visibilityCheck": [
+        {
+          "accessor": "propertyBag",
+          "key": "lastLocation",
+          "value": "2",
+          "operator": "equals"
+        }
+      ],
+      "onEnter": [
+        {
+          "eventType": "input",
+          "placeholder": "Antwort eingeben",
+          "title": "BIZ Frage:",
+          "text": "Wofür steht BIZ?",
+          "btnText": "Antworten",
+          "answer": "Business- & Innovationszentrum",
+          "hint": "Schau nach oben.",
+          "condition": null,
+          "nextEvent": {
+            "eventType": "popup",
+            "title": "Richtig",
+            "text": "BIZ steht für Business- & Innovationszentrum. Das Business-Innovations-Zentrum (BIZ) in St. Pölten bietet eine ideale Infrastruktur für Startups mit attraktiven Mietkonditionen und zentral gelegenem Empfang. In unmittelbarer Nähe zur Fachhochschule St. Pölten ermöglicht es Networking und Synergien für zukünftige Projekte.",
+            "btnText": "Nächster Stop",
+            "nextEvent": {
+              "eventType": "bag",
+              "property": {
+                "key": "lastLocation",
+                "value": "3",
+                "action": "update"
+              },
+              "nextEvent": null
+            }
+          }
+        }
+      ],
+      "onLeave": []
+    },
+    {
+      "id": "4",
+      "style": {
+        "spread": "point",
+        "marker": "checkpoint"
+      },
+      "name": "Outdoor Teaching Space",
+      "position": {
+        "type": "absolute",
+        "lat": 48.213013,
+        "lng": 15.63274,
+        "movement": null
+      },
+      "radius": 20,
+      "visibilityCheck": [
+        {
+          "accessor": "propertyBag",
+          "key": "lastLocation",
+          "value": "3",
+          "operator": "equals"
+        }
+      ],
+      "onEnter": [
+        {
+          "eventType": "input",
+          "placeholder": "Antwort eingeben",
+          "title": "Outdoor Teaching Space Frage:",
+          "text": "Wie viele Bänke hat das Outdoor Teaching Space?",
+          "btnText": "Antworten",
+          "answer": "9",
+          "hint": "Nur die Bänke um das Podium zählen.",
+          "condition": null,
+          "nextEvent": {
+            "eventType": "popup",
+            "title": "Richtig",
+            "text": "Das Outdoor Teaching Space hat 9 Bänke. Das Outdoor Teaching Space bietet eine eine Freiluftklasse mit Steckdosen und WLAN, in der auch outdoor Lehrveranstaltungen abgehalten werden können.",
+            "btnText": "Nächster Stop",
+            "nextEvent": {
+              "eventType": "bag",
+              "property": {
+                "key": "lastLocation",
+                "value": "4",
+                "action": "update"
+              },
+              "nextEvent": null
+            }
+          }
+        }
+      ],
+      "onLeave": []
+    },
+    {
+      "id": "5",
+      "style": {
+        "spread": "point",
+        "marker": "checkpoint"
+      },
+      "name": "Wihast",
+      "position": {
+        "type": "absolute",
+        "lat": 48.212179,
+        "lng": 15.635387,
+        "movement": null
+      },
+      "radius": 20,
+      "visibilityCheck": [
+        {
+          "accessor": "propertyBag",
+          "key": "lastLocation",
+          "value": "4",
+          "operator": "equals"
+        }
+      ],
+      "onEnter": [
+        {
+          "eventType": "input",
+          "placeholder": "Antwort eingeben",
+          "title": "Wihast Frage:",
+          "text": "Welche Hausnummer hat das Wihast?",
+          "btnText": "Antworten",
+          "answer": "36",
+          "hint": "Schau auf das Schild.",
+          "condition": null,
+          "nextEvent": {
+            "eventType": "popup",
+            "title": "Richtig",
+            "text": "Das Wihast hat die Hausnummer 36. Das Wihast ist ein Studentenwohnheim in St. Pölten, welches nur 400 Meter und damit wenige Gehminuten von der Fachhochschule entfernt ist. Das Gebäude bietet moderne Einbettzimmer in Wohnungen für zwei Personen.",
+            "btnText": "Nächster Stop",
+            "nextEvent": {
+              "eventType": "bag",
+              "property": {
+                "key": "lastLocation",
+                "value": "5",
+                "action": "update"
+              },
+              "nextEvent": null
+            }
+          }
+        }
+      ],
+      "onLeave": []
+    },
+    {
+      "id": "6",
+      "style": {
+        "spread": "point",
+        "marker": "checkpoint"
+      },
+      "name": "Campus Domus",
+      "position": {
+        "type": "absolute",
+        "lat": 48.213183,
+        "lng": 15.636628,
+        "movement": null
+      },
+      "radius": 20,
+      "visibilityCheck": [
+        {
+          "accessor": "propertyBag",
+          "key": "lastLocation",
+          "value": "5",
+          "operator": "equals"
+        }
+      ],
+      "onEnter": [
+        {
+          "eventType": "input",
+          "placeholder": "Antwort eingeben",
+          "title": "Campus Domus Frage:",
+          "text": "Welche Farbe haben die Streifen am mittleren Haus?",
+          "btnText": "Antworten",
+          "answer": "Gelb",
+          "hint": "Es gibt zwei Gebäudeblöcke mit jeweils drei Häusern.",
+          "condition": null,
+          "nextEvent": {
+            "eventType": "popup",
+            "title": "Richtig",
+            "text": "Das mittlere Haus hat gelbe Streifen. Der Campus Domus gilt ebenfalls als Studentenwohnheim. Er besteht aus 6 Häusern mit insgesamt 86 Wohngruppen, jeweils mit drei Einzelzimmern, einer Küche, zwei Bädern, einem WC und einem Vorraum. Die Fachhochschule in nur 5 Gehminuten von hier erreichbar.",
+            "btnText": "Nächster Stop",
+            "nextEvent": {
+              "eventType": "bag",
+              "property": {
+                "key": "lastLocation",
+                "value": "6",
+                "action": "update"
+              },
+              "nextEvent": null
+            }
+          }
+        }
+      ],
+      "onLeave": []
+    },
+    {
+      "id": "7",
+      "style": {
+        "spread": "point",
+        "marker": "checkpoint"
+      },
+      "name": "Rosi's",
+      "position": {
+        "type": "absolute",
+        "lat": 48.213811,
+        "lng": 15.633563,
+        "movement": null
+      },
+      "radius": 20,
+      "visibilityCheck": [
+        {
+          "accessor": "propertyBag",
+          "key": "lastLocation",
+          "value": "6",
+          "operator": "equals"
+        }
+      ],
+      "onEnter": [
+        {
+          "eventType": "input",
+          "placeholder": "Antwort eingeben",
+          "title": "Rosi's Frage:",
+          "text": "Welche Farbe hat das Schild auf dem das Logo von Rosi's am Gebäude abgebildet ist?",
+          "btnText": "Antworten",
+          "answer": "Schwarz",
+          "hint": "Das Schild hängt links über dem Eingang.",
+          "condition": null,
+          "nextEvent": {
+            "eventType": "popup",
+            "title": "Richtig",
+            "text": "Das Schild mit dem Logo ist schwarz. In der Nähe der Fachhochschule gelegen ist Rosi's während der Mittagspause beliebt. Das Restaurant bietet eine vielfältige Auswahl an Speisen, darunter Burger, Bowls, Salate, Pasta und Wraps.",
+            "btnText": "Nächster Stop",
+            "nextEvent": {
+              "eventType": "bag",
+              "property": {
+                "key": "lastLocation",
+                "value": "7",
+                "action": "update"
+              },
+              "nextEvent": null
+            }
+          }
+        }
+      ],
+      "onLeave": []
+    },
+    {
+      "id": "8",
+      "style": {
+        "spread": "point",
+        "marker": "checkpoint"
+      },
+      "name": "Noodle King",
+      "position": {
+        "type": "absolute",
+        "lat": 48.215254,
+        "lng": 15.6299733,
+        "movement": null
+      },
+      "radius": 20,
+      "visibilityCheck": [
+        {
+          "accessor": "propertyBag",
+          "key": "lastLocation",
+          "value": "7",
+          "operator": "equals"
+        }
+      ],
+      "onEnter": [
+        {
+          "eventType": "input",
+          "placeholder": "Antwort eingeben",
+          "title": "Noodle King Frage:",
+          "text": "Wie viele % Rabatt gibt es auf Sushi und Maki?",
+          "btnText": "Antworten",
+          "answer": "50",
+          "hint": "Schau auf die Scheiben außen.",
+          "condition": null,
+          "nextEvent": {
+            "eventType": "popup",
+            "title": "Richtig",
+            "text": "Es gibt 50% Rabatt auf Sushi und Maki. Noodle King ist eine etablierte Kette mit mehreren Standorten in Österreich. Neben der Möglichkeit, während der Mittagspause qualitativ hochwertige asiatische Speisen zu bestellen, bietet das Unternehmen eine breite Palette an Standorten im gesamten Land an.",
+            "btnText": "Nächster Stop",
+            "nextEvent": {
+              "eventType": "bag",
+              "property": {
+                "key": "lastLocation",
+                "value": "8",
+                "action": "update"
+              },
+              "nextEvent": null
+            }
+          }
+        }
+      ],
+      "onLeave": []
+    },
+    {
+      "id": "9",
+      "style": {
+        "spread": "point",
+        "marker": "checkpoint"
+      },
+      "name": "Gebäude A",
+      "position": {
+        "type": "absolute",
+        "lat": 48.21399,
+        "lng": 15.631633,
+        "movement": null
+      },
+      "radius": 20,
+      "visibilityCheck": [
+        {
+          "accessor": "propertyBag",
+          "key": "lastLocation",
+          "value": "8",
+          "operator": "equals"
+        }
+      ],
+      "onEnter": [
+        {
+          "eventType": "bag",
+          "property": {
+            "key": "lastLocation",
+            "value": "9",
+            "action": "update"
+          },
+          "nextEvent": null
+        }
+      ],
+      "onLeave": []
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "xp-week",
+  "description": "Extreme Programming Week",
+  "version": "1.0.1",
+  "private": false,
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "pnpm i && pnpm -r start:watch",
+    "f": "pnpm frontend",
+    "b": "pnpm backend",
+    "frontend": "pnpm -F '*frontend' start:watch",
+    "backend": "pnpm -F '*backend' start:watch",
+    "prerel": "git diff --quiet --exit-code HEAD",
+    "rel:major": "pnpm prerel && pnpm version major --workspaces --no-workspaces-update --include-workspace-root --no-git-tag-version && pnpm seqrel",
+    "rel:minor": "pnpm prerel && pnpm version minor --workspaces --no-workspaces-update --include-workspace-root --no-git-tag-version && pnpm seqrel",
+    "rel:patch": "pnpm prerel && pnpm version patch --workspaces --no-workspaces-update --include-workspace-root --no-git-tag-version && pnpm seqrel",
+    "seqrel": "prettier --write frontend/src backend/src common && git add . && git commit -m $npm_package_version"
+  },
+  "workspaces": {
+    "packages": [
+      "frontend",
+      "backend",
+      "common"
+    ]
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "prettier": "^3.1.1",
+    "rimraf": "^5.0.5"
+  },
+  "packageManager": "pnpm@8.15.4+sha256.cea6d0bdf2de3a0549582da3983c70c92ffc577ff4410cbf190817ddc35137c2"
+}

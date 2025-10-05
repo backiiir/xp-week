@@ -1,0 +1,166 @@
+{
+  "appVersion": "1.0.0",
+  "jsonVersion": "1.0.0",
+  "name": "FH St. Pölten Tour (Test)",
+  "instructions": {
+    "title": "Willkommen zur FHSTP Campus Tour (Testing Edition)",
+    "text": "Begib dich auf eine Reise durch St. Pölten. Besuche die verschiedenen Orte und beantworte dort jeweils eine Frage pro Ort. Wenn du alle Tour-Stopps besucht und die Fragen richtig beantwortet hast, hast du gewonnen.",
+    "btnText": "Tour starten"
+  },
+  "propertyBag": [
+    {
+      "name": "lastLocation",
+      "value": "0",
+      "icon": null
+    }
+  ],
+  "gameConditions": [
+    {
+      "type": "win",
+      "condition": {
+        "accessor": "propertyBag",
+        "key": "lastLocation",
+        "value": "2",
+        "operator": "equals"
+      },
+      "events": [
+        {
+          "eventType": "popup",
+          "title": "Tour vorbei!",
+          "text": "Gratuliere, du hast die Campus Tour (Testing Edition) abgeschlossen!",
+          "btnText": "Zurück zum Menü",
+          "nextEvent": {
+            "eventType": "backToMenu",
+            "nextEvent": null
+          }
+        }
+      ]
+    },
+    {
+      "type": "lose",
+      "condition": {
+        "accessor": "globalBag",
+        "key": "timeelapsed",
+        "value": 120000,
+        "operator": "greaterThan"
+      },
+      "events": [
+        {
+          "eventType": "popup",
+          "title": "Zeit abgelaufen!",
+          "text": "Du hast zu lange gebraucht, um die Tour (Testing Edition) abzuschließen. Versuche es noch einmal!",
+          "btnText": "Zurück zum Menü",
+          "nextEvent": {
+            "eventType": "backToMenu",
+            "nextEvent": null
+          }
+        }
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": "1",
+      "style": {
+        "spread": "point",
+        "marker": "checkpoint"
+      },
+      "name": "Gebäude B",
+      "position": {
+        "type": "absolute",
+        "lat": 48.213289,
+        "lng": 15.63117,
+        "movement": null
+      },
+      "radius": 20,
+      "visibilityCheck": [
+        {
+          "accessor": "propertyBag",
+          "key": "lastLocation",
+          "value": "0",
+          "operator": "equals"
+        }
+      ],
+      "onEnter": [
+        {
+          "eventType": "input",
+          "placeholder": "Antwort eingeben",
+          "title": "Gebäude B Frage:",
+          "text": "Wie viele Lifte hat Gebäude B?",
+          "btnText": "Antworten",
+          "answer": "2",
+          "hint": "Neben dem Campus Service Center.",
+          "condition": null,
+          "nextEvent": {
+            "eventType": "popup",
+            "title": "Richtig",
+            "text": "Das Gebäude B hat 2 Lifte. Gebäude B, das erst 2021 eröffnet wurde, beherbergt am Campus St. Pölten zukunftsweisende Labore sowie modernste Seminarräume. Durch die Verbindung mit Gebäude A über einen gläsernen Verbindungsgang entsteht eine harmonische Einheit, die den Campus zu einem inspirierenden Ort für Veranstaltungen jeglicher Art macht.",
+            "btnText": "Nächster Stop",
+            "nextEvent": {
+              "eventType": "bag",
+              "property": {
+                "key": "lastLocation",
+                "value": "1",
+                "action": "update"
+              },
+              "nextEvent": null
+            }
+          }
+        }
+      ],
+      "onLeave": []
+    },
+    {
+      "id": "2",
+      "style": {
+        "spread": "point",
+        "marker": "checkpoint"
+      },
+      "name": "Gebäude A",
+      "position": {
+        "type": "absolute",
+        "lat": 48.21399,
+        "lng": 15.631633,
+        "movement": null
+      },
+      "radius": 20,
+      "visibilityCheck": [
+        {
+          "accessor": "propertyBag",
+          "key": "lastLocation",
+          "value": "1",
+          "operator": "equals"
+        }
+      ],
+      "onEnter": [
+        {
+          "eventType": "input",
+          "placeholder": "Antwort eingeben",
+          "title": "Gebäude A Frage:",
+          "text": "Wie viele Stockwerke hat Gebäude A?",
+          "btnText": "Antworten",
+          "answer": "5",
+          "hint": "Vergiss nicht den Keller.",
+          "condition": null,
+          "nextEvent": {
+            "eventType": "popup",
+            "title": "Richtig",
+            "text": "Das Gebäude A hat 5 Stockwerke. Gebäude A am Campus St. Pölten bietet großzügige Veranstaltungsräume, darunter drei Festsäle und das Audimax. Mit seiner modernen Architektur aus Glas und Stahl im Außenbereich und einer warmen Wohlfühlatmosphäre im Inneren schafft es den idealen Rahmen für Fachtagungen, Firmenfeiern und andere Events.",
+            "btnText": "Nächster Stop",
+            "condition": null,
+            "nextEvent": {
+              "eventType": "bag",
+              "property": {
+                "key": "lastLocation",
+                "value": "2",
+                "action": "update"
+              },
+              "nextEvent": null
+            }
+          }
+        }
+      ],
+      "onLeave": []
+    }
+  ]
+}

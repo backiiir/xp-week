@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "angular.ng-template",
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "stivo.tailwind-fold",
+    "heybourn.headwind",
+    "ionic.ionic",
+    "figma.figma-vscode-extension",
+    "pkief.material-icon-theme",
+    "pkief.material-product-icons",
+    "mongodb.mongodb-vscode",
+    "ms-azuretools.vscode-docker"
+  ]
+}
